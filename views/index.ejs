@@ -13,16 +13,28 @@
   </head>
   <body>
     
-    <button id="testbtn">testbtn</button>
     
-    <h1  class="w3-text-gray"><%= title %></h1>
     
     <div class="content-container">
+
+      <h1  class="w3-text-gray"><%= title %></h1>
+       
       <div id="container" style="width: 100%; height: 400px; margin: 0 auto"></div>
+      
+      <div class="w3-container">
+        <ul id="stock-items" class="w3-ul">
+        </ul>
+        <form class="w3-row w3-margin-bottom" style="margin-top: 30px;">
+          <input class="w3-input w3-border w3-col m10 s8" type="text" placeholder="Add stock symbol." name="search_location" required>
+          <button class="w3-button w3-blue-gray w3-border w3-col m2 s4" type="submit">Add</button>
+        </form>
+      </div>
+
     </div>
     
     
-    <script src="/javascripts/socket-io-client.js"></script>
+    
     <script src="/javascripts/chart.js"></script>
+    <script src="/javascripts/socket-io-client.js"></script>
   </body>
 </html>

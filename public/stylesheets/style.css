@@ -1,3 +1,9 @@
+
+
+
+
+
+/*********************************************************/
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -11,4 +17,18 @@ a {
 .content-container{
   max-width: 960px;
   margin: 0 auto;
+}
+
+.content-container ul li{
+	width: 33.3%;
+	display: block;
+  float: left;
+  border-bottom: initial !important;
+  text-align: left;
+}
+
+.content-container ul:after {
+  content: "";
+  display: table;
+  clear: both;
 }
