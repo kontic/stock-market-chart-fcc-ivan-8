@@ -1,4 +1,4 @@
-var socket = io.connect('https://stock-market-chart-fcc-ivan-8-ivan8.c9users.io/');
+
 
 
 //emit to server
@@ -10,8 +10,7 @@ var socket = io.connect('https://stock-market-chart-fcc-ivan-8-ivan8.c9users.io/
 //listen from server
 
 socket.on('initial_data', function(data){
-  console.log('------------------------', data);
-  
+
   var series_num = chart.series.length;
   for(var k = series_num - 1; k >= 0; k--){
     chart.series[k].remove();
@@ -38,22 +37,44 @@ socket.on('initial_data', function(data){
   
 });
 
+socket.on('error_msg', function(data){
+
+  alert(data.msg);
+
+});
 
 
-
-
+//------------------------------------------------------------------------------
 $( "#stock-items" ).on( "click", "li span", function( event ) {
   event.preventDefault();
-  console.log($( this ).attr('value'), '--------------------------------');
-  alert("Hello!");
+  socket.emit('remove_stock_item', {
+    item: $( this ).attr('value')
+  });
+
 });
 
 $( "form" ).on( "submit", function( event ) {
   event.preventDefault();
-  socket.emit('add_stock_item', {
-    item: $( "form input" ).val()
+  
+  var item = ($( "form input" ).val()).toUpperCase();
+  
+  var item_exists = false;
+  
+  $('ul li span').each(function(i, obj) {
+    if(item === $( this ).attr('value')){
+      item_exists = true;
+      return false;
+    }
   });
-  $( "form input" ).val('')
+  
+  if(!item_exists){
+    socket.emit('add_stock_item', {
+      item: item
+    });
+    $( "form input" ).val('')
+  }else{
+    alert('Item already exist!');
+  }
 });
 
 
